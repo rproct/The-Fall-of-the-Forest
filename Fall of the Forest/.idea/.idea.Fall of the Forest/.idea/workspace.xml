@@ -17,12 +17,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Test.txt" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/TitleCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/PressStart.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/Menu.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/MainMenuScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/PauseScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/EventScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/FadeText.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/EventScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/MainMenuScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/Menu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/PauseScript.cs" />
       </list>
     </option>
   </component>
@@ -74,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603412998500</updated>
       <workItem from="1603413007580" duration="17687000" />
-      <workItem from="1603478405416" duration="1299000" />
+      <workItem from="1603478405416" duration="4020000" />
     </task>
     <servers />
   </component>
@@ -85,5 +85,11 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="771" y="-7" width="709" height="1027" maximized="true" key="dock-window-1" timestamp="1603480843229">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="-7" width="709" height="1027" maximized="true" key="dock-window-1/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1603480843229" />
   </component>
 </project>
