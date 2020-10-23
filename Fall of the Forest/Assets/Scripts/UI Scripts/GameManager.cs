@@ -6,10 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Header("Score UI")]
-    public GameObject LivesText = GameObject.Find("Lives Count");
-    public GameObject MushroomText = GameObject.Find("Mushroom Count");
+    public GameObject LivesText;
+    public GameObject MushroomText;
 
     private int MushroomCount = 0;
+    private int LifeCount = 3;
 
     //Increment
     public void CollectedMushroom()
@@ -22,5 +23,11 @@ public class GameManager : MonoBehaviour
     {
         MushroomCount--;
         MushroomText.GetComponent<TMPro.TextMeshProUGUI>().text = MushroomCount.ToString();
+    }
+
+    public void LifeDown()
+    {
+        LifeCount--;
+        LivesText.GetComponent<TMPro.TextMeshProUGUI>().text = LifeCount.ToString();
     }
 }
