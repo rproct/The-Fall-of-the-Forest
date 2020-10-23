@@ -28,6 +28,7 @@
           <e p="UI Scripts" t="Include">
             <e p="EventScript.cs" t="Include" />
             <e p="FadeText.cs" t="Include" />
+            <e p="GameManager.cs" t="Include" />
             <e p="MainMenuScript.cs" t="Include" />
             <e p="Menu.cs" t="Include" />
             <e p="PauseScript.cs" t="Include" />

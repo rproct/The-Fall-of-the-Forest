@@ -177,6 +177,9 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManager>().LifeDown();
             Debug.Log("Player died");
         }
+        
+        if(Input.GetButtonDown("Pause"))
+            TogglePause();
     }
 
     private void FixedUpdate()
