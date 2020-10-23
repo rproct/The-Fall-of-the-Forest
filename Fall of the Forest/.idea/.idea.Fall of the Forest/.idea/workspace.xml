@@ -14,12 +14,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Test.txt" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/TitleCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/FadeText.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/PressStart.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/Menu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/FadeText.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/MainMenuScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI Scripts/PauseScript.cs" />
       </list>
     </option>
   </component>
@@ -35,6 +37,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../Build\Fall of the Forest.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\CST-428-Adv-Game-Development\The-Fall-of-the-Forest\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -62,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603412998500</updated>
-      <workItem from="1603413007580" duration="12072000" />
+      <workItem from="1603413007580" duration="17377000" />
     </task>
     <servers />
   </component>

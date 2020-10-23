@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody m_rigidBody = null;
 
     [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
-
+    public GameObject pauseMenu;
+    
     private float m_currentV = 0;
     private float m_currentH = 0;
 
@@ -118,6 +119,9 @@ public class PlayerController : MonoBehaviour
         {
             m_jumpInput = true;
         }
+
+        if(Input.GetButtonDown("Pause")) 
+            TogglePause();
     }
 
     private void FixedUpdate()
@@ -228,6 +232,20 @@ public class PlayerController : MonoBehaviour
             m_animator.SetTrigger("Jump");
             soundEffect.clip = jumpLaunch;
             soundEffect.Play();
+        }
+    }
+
+    private void TogglePause()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
         }
     }
 }
