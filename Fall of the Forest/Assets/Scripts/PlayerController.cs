@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -43,10 +44,15 @@ public class PlayerController : MonoBehaviour
 
     private List<Collider> m_collisions = new List<Collider>();
 
+    private float inp = 0.0f;
+
     //Sounds
     public AudioSource soundEffect;
     public AudioClip jumpLaunch;
     public AudioClip jumpLand;
+
+    //Death
+    float death = 0f;
 
     private void Awake()
     {
@@ -68,35 +74,58 @@ public class PlayerController : MonoBehaviour
                 m_isGrounded = true;
             }
         }
+
+        //Tree mechanic
+        if(collision.gameObject.name == "RedWood 2(Clone)")
+        {
+            inp = Input.GetAxis("WaterTree");
+            Debug.Log("Use Mushroom to save the tree. They need water and you will be considered a Hero.");
+            Destroy(collision.gameObject);
+            if (inp != 0.0f)
+            {
+                Debug.Log("E was pressed");
+                GameObject.Find("GameManager").GetComponent<GameManager>().UsedMushroom();
+                Destroy(collision.gameObject);
+            }
+        }
+
+        if (collision.gameObject.name == "Mushroom(Clone)")
+        {
+            Debug.Log("You collected Mushroom");
+            //GameObject.Find("GameManager").GetComponent<GameManager>().CollectedMushroom();
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        ContactPoint[] contactPoints = collision.contacts;
-        bool validSurfaceNormal = false;
-        for (int i = 0; i < contactPoints.Length; i++)
         {
-            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            ContactPoint[] contactPoints = collision.contacts;
+            bool validSurfaceNormal = false;
+            for (int i = 0; i < contactPoints.Length; i++)
             {
-                validSurfaceNormal = true; break;
+                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+                {
+                    validSurfaceNormal = true; break;
+                }
             }
-        }
 
-        if (validSurfaceNormal)
-        {
-            m_isGrounded = true;
-            if (!m_collisions.Contains(collision.collider))
+            if (validSurfaceNormal)
             {
-                m_collisions.Add(collision.collider);
+                m_isGrounded = true;
+                if (!m_collisions.Contains(collision.collider))
+                {
+                    m_collisions.Add(collision.collider);
+                }
             }
-        }
-        else
-        {
-            if (m_collisions.Contains(collision.collider))
+            else
             {
-                m_collisions.Remove(collision.collider);
+                if (m_collisions.Contains(collision.collider))
+                {
+                    m_collisions.Remove(collision.collider);
+                }
+                if (m_collisions.Count == 0) { m_isGrounded = false; }
             }
-            if (m_collisions.Count == 0) { m_isGrounded = false; }
         }
     }
 
@@ -111,12 +140,18 @@ public class PlayerController : MonoBehaviour
             m_isGrounded = false;
         }
     }
-
     private void Update()
     {
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
         {
             m_jumpInput = true;
+        }
+
+        death = transform.position.y;
+        if(death< -1.5f)
+        {
+            Destroy(gameObject);
+            Debug.Log("Player died");
         }
     }
 
@@ -173,7 +208,7 @@ public class PlayerController : MonoBehaviour
 
     private void DirectUpdate()
     {
-        float v = 0;//Input.GetAxis("Vertical");
+        float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
         Transform camera = Camera.main.transform;
