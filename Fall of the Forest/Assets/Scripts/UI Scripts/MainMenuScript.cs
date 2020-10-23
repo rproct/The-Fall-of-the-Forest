@@ -6,80 +6,51 @@ using UI_Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScript : MonoBehaviour
+namespace UI_Scripts
 {
-    public TextMeshProUGUI[] tmps;
-
-    public GameObject other;
-    private static readonly Color32 white = new Color32(255, 255, 255, 255);
-    private static readonly Color32 yellow = new Color32(201, 171, 0, 255);
-    private int selection;
-    private bool buttonUse;
-
-    private void OnEnable()
+    public class MainMenuScript : Menu
     {
-        foreach (TextMeshProUGUI t in tmps)
+        public TextMeshProUGUI[] temp;
+
+        public GameObject other;
+
+
+        private void OnEnable()
         {
-            t.faceColor = white;
+            InitializeMenu(temp);
+            other.SetActive(false);
         }
-        selection = 0;
-        tmps[selection].faceColor = yellow;
-        other.SetActive(false);
-        buttonUse = false;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetButtonDown("Cancel"))
-            foreach (TextMeshProUGUI t in tmps)
-                StartCoroutine(FadeText.fadeOutText(t, gameObject));
-
-        if(Input.GetButtonDown("Submit"))
-            executeSelection();
-        
-        if (Input.GetAxisRaw("Vertical") > 0)
+        // Update is called once per frame
+        void Update()
         {
-            if (buttonUse == false)
+            if (Input.GetButtonDown("Cancel"))
+                foreach (TextMeshProUGUI t in tmps)
+                    StartCoroutine(FadeText.fadeOutText(t, gameObject));
+
+            if (Input.anyKey)
+                getInput();
+            else
+                buttonUse = false;
+        }
+
+        protected override void executeSelection()
+        {
+            switch (selection)
             {
-                changeSelection(1);
-                buttonUse = true;
+                case 0:
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Main Scene");
+                    break;
+                case 1:
+                    Application.Quit();
+                    break;
             }
         }
-        else if (Input.GetAxisRaw("Vertical") < 0)
+
+        private void OnDisable()
         {
-            if (buttonUse == false)
-            {
-                changeSelection(-1);
-                buttonUse = true;
-            }
+            other.SetActive(true);
         }
-        else
-            buttonUse = false;
-    }
-
-    private void changeSelection(int offset)
-    {
-        tmps[selection].faceColor = white;
-        selection = Math.Abs((selection + offset) % tmps.Length);
-        tmps[selection].faceColor = yellow;
-    }
-
-    private void executeSelection()
-    {
-        switch (selection)
-        {
-            case 0:
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Main Scene");
-                break;
-            case 1:
-                break;
-        }
-    }
-
-    private void OnDisable()
-    {
-        other.SetActive(true);
     }
 }
 
