@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
     private void DirectUpdate()
     {
-        float v = Input.GetAxis("Vertical");
+        float v = 0;//Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
         Transform camera = Camera.main.transform;
@@ -251,6 +251,8 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(m_currentDirection);
             transform.position += m_currentDirection * m_moveSpeed * Time.deltaTime;
+            
+            transform.position = new Vector3(transform.position.x, transform.position.y, -0.02f);
 
             m_animator.SetFloat("MoveSpeed", direction.magnitude);
         }
