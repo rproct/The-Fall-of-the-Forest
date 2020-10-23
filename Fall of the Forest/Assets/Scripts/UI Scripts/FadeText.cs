@@ -1,0 +1,50 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+namespace UI_Scripts
+{
+    public class FadeText
+    {
+        public static IEnumerator fadeOutText(TextMeshProUGUI tmp, GameObject go)
+        {
+            byte alpha = tmp.faceColor.a;
+            byte red = tmp.faceColor.r;
+            byte green = tmp.faceColor.g;
+            byte blue = tmp.faceColor.b;
+            int i = getAlphaComparision(0, alpha);
+            while (i > 0)
+            {
+                alpha -= 5;
+                yield return new WaitForSecondsRealtime(0.01f);
+                tmp.faceColor = new Color32(red, green, blue, alpha);
+                i = getAlphaComparision(0, alpha);
+            }
+            if(go != null)
+                go.SetActive(false);
+        }
+        
+        public static IEnumerator fadeInText(TextMeshProUGUI tmp)
+        {
+            byte alpha = tmp.faceColor.a;
+            byte red = tmp.faceColor.r;
+            byte green = tmp.faceColor.g;
+            byte blue = tmp.faceColor.b;
+            int i = getAlphaComparision(alpha, 255);
+            while (i > 0)
+            {
+                
+                alpha += 5;
+                yield return new WaitForSecondsRealtime(0.01f);
+                tmp.faceColor = new Color32(red, green, blue, alpha);
+                i = getAlphaComparision(alpha, 255);
+            }
+        }
+
+        private static int getAlphaComparision(byte x, byte y)
+        {
+            return y.CompareTo(x);
+        }
+    }
+}

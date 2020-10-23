@@ -27,7 +27,7 @@ public class TextToMap : MonoBehaviour
                 {
                     if (c == tm.character)
                     {
-                        if(c == 't' || c=='p')
+                        if(c == 't' || c=='p' || c=='m')
                         {
                             currentPosition = new Vector2(currentPosition.x, currentPosition.y - 0.7f);
                             Instantiate(tm.prefab, currentPosition, Quaternion.identity, transform);
