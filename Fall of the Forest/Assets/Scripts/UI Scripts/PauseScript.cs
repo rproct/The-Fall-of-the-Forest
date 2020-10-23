@@ -4,29 +4,23 @@ using System.Collections.Generic;
 using TMPro;
 using UI_Scripts;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UI_Scripts
 {
-    public class MainMenuScript : Menu
+    public class PauseScript : Menu
     {
         public TextMeshProUGUI[] temp;
-
-        public GameObject other;
-
 
         private void OnEnable()
         {
             InitializeMenu(temp);
-            other.SetActive(false);
         }
 
         // Update is called once per frame
         void Update()
         {
             if (Input.GetButtonDown("Cancel"))
-                foreach (TextMeshProUGUI t in tmps)
-                    StartCoroutine(FadeText.fadeOutText(t, gameObject));
+                Unpause();
 
             if (Input.anyKey)
                 getInput();
@@ -39,19 +33,24 @@ namespace UI_Scripts
             switch (selection)
             {
                 case 0:
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Main Scene");
+                    Unpause();
                     break;
                 case 1:
-                    Application.Quit();
+                    Unpause();
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager
+                        .GetActiveScene().name);
+                    break;
+                case 2:
+                    Unpause();
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("Title Scene");
                     break;
             }
         }
 
-        private void OnDisable()
+        private void Unpause()
         {
-            other.SetActive(true);
+            Time.timeScale = 1;
+            gameObject.SetActive(false);
         }
     }
 }
-
-

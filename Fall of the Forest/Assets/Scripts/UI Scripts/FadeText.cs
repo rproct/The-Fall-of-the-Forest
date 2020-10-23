@@ -21,7 +21,8 @@ namespace UI_Scripts
                 tmp.faceColor = new Color32(red, green, blue, alpha);
                 i = getAlphaComparision(0, alpha);
             }
-            go.SetActive(false);
+            if(go != null)
+                go.SetActive(false);
         }
         
         public static IEnumerator fadeInText(TextMeshProUGUI tmp)
@@ -31,8 +32,9 @@ namespace UI_Scripts
             byte green = tmp.faceColor.g;
             byte blue = tmp.faceColor.b;
             int i = getAlphaComparision(alpha, 255);
-            while (i < 0)
+            while (i > 0)
             {
+                
                 alpha += 5;
                 yield return new WaitForSecondsRealtime(0.01f);
                 tmp.faceColor = new Color32(red, green, blue, alpha);
