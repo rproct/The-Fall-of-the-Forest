@@ -100,6 +100,13 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             GameObject.Find("GameManager").GetComponent<GameManager>().CollectedMushroom();
         }
+
+        if (collision.gameObject.name == "Water(Clone)")
+        {
+            Debug.Log("Player Died");
+            Destroy(gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().LifeDown();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
