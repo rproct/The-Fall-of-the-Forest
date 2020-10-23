@@ -77,24 +77,28 @@ public class PlayerController : MonoBehaviour
         }
 
         //Tree mechanic
-        if(collision.gameObject.name == "RedWood 2(Clone)")
+        if(collision.gameObject.CompareTag("Tree"))
         {
-            inp = Input.GetAxis("WaterTree");
+            //inp = Input.GetAxis("WaterTree");
             Debug.Log("Use Mushroom to save the tree. They need water and you will be considered a Hero.");
-            Destroy(collision.gameObject);
+            if (Input.GetKeyDown("e"))
+            {
+                //Debug.Log("E was pressed");
+            }
+            /*Destroy(collision.gameObject);
             if (inp != 0.0f)
             {
                 Debug.Log("E was pressed");
-                GameObject.Find("GameManager").GetComponent<GameManager>().UsedMushroom();
+                //GameObject.Find("GameManager").GetComponent<GameManager>().UsedMushroom();
                 Destroy(collision.gameObject);
-            }
+            }*/
         }
 
         if (collision.gameObject.name == "Mushroom(Clone)")
         {
             Debug.Log("You collected Mushroom");
-            //GameObject.Find("GameManager").GetComponent<GameManager>().CollectedMushroom();
             Destroy(collision.gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().CollectedMushroom();
         }
     }
 
@@ -128,6 +132,18 @@ public class PlayerController : MonoBehaviour
                 if (m_collisions.Count == 0) { m_isGrounded = false; }
             }
         }
+
+        if (collision.gameObject.CompareTag("Tree"))
+        {
+            //inp = Input.GetAxis("WaterTree");
+            Debug.Log("Use Mushroom to save the tree. They need water and you will be considered a Hero.");
+            if (Input.GetKeyDown("e"))
+            {
+                Debug.Log("E was pressed");
+                Destroy(collision.gameObject);
+                GameObject.Find("GameManager").GetComponent<GameManager>().UsedMushroom();
+            }
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -148,9 +164,10 @@ public class PlayerController : MonoBehaviour
             m_jumpInput = true;
         }
         death = transform.position.y;
-        if(death< -1.5f)
+        if(death < -2f)
         {
             Destroy(gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().LifeDown();
             Debug.Log("Player died");
         }
     }
