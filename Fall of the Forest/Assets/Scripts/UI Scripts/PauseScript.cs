@@ -2,29 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UI_Scripts;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class MainMenuScript : MonoBehaviour
+public class PauseScript : MonoBehaviour
 {
     public TextMeshProUGUI[] tmps;
-
-    public GameObject other;
+    private int selection;
     private static readonly Color32 white = new Color32(255, 255, 255, 255);
     private static readonly Color32 yellow = new Color32(201, 171, 0, 255);
-    private int selection;
     private bool buttonUse;
-
     private void OnEnable()
     {
         foreach (TextMeshProUGUI t in tmps)
         {
             t.faceColor = white;
         }
+
         selection = 0;
         tmps[selection].faceColor = yellow;
-        other.SetActive(false);
         buttonUse = false;
     }
 
@@ -32,13 +27,12 @@ public class MainMenuScript : MonoBehaviour
     void Update()
     {
         if(Input.GetButtonDown("Cancel"))
-            foreach (TextMeshProUGUI t in tmps)
-                StartCoroutine(FadeText.fadeOutText(t, gameObject));
-
+            Unpause();
+        
         if(Input.GetButtonDown("Submit"))
             executeSelection();
         
-        if (Input.GetAxisRaw("Vertical") > 0)
+        if (Input.GetAxisRaw("Vertical") < 0)
         {
             if (buttonUse == false)
             {
@@ -46,7 +40,7 @@ public class MainMenuScript : MonoBehaviour
                 buttonUse = true;
             }
         }
-        else if (Input.GetAxisRaw("Vertical") < 0)
+        else if (Input.GetAxisRaw("Vertical") > 0)
         {
             if (buttonUse == false)
             {
@@ -57,11 +51,13 @@ public class MainMenuScript : MonoBehaviour
         else
             buttonUse = false;
     }
-
+    
     private void changeSelection(int offset)
     {
         tmps[selection].faceColor = white;
-        selection = Math.Abs((selection + offset) % tmps.Length);
+        selection = (selection + offset) % tmps.Length;
+        if (selection < 0)
+            selection = tmps.Length - 1;
         tmps[selection].faceColor = yellow;
     }
 
@@ -70,17 +66,23 @@ public class MainMenuScript : MonoBehaviour
         switch (selection)
         {
             case 0:
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Main Scene");
+                Unpause();
                 break;
             case 1:
+                Unpause();
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager
+                    .GetActiveScene().name);
+                break;
+            case 2:
+                Unpause();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Title Scene");
                 break;
         }
     }
 
-    private void OnDisable()
+    private void Unpause()
     {
-        other.SetActive(true);
+        Time.timeScale = 1;
+        gameObject.SetActive(false);
     }
 }
-
-
